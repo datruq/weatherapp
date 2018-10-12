@@ -1,6 +1,6 @@
 package com.finleap.casestudy.weatherapp.domain.usecase;
 
-import com.finleap.casestudy.weatherapp.Utils.DateUtils;
+import com.finleap.casestudy.weatherapp.utils.DateUtils;
 import com.finleap.casestudy.weatherapp.api.dto.OpenWeatherMapDTO;
 import com.finleap.casestudy.weatherapp.domain.entity.ForcastWeatherMetricsEntity;
 import com.finleap.casestudy.weatherapp.domain.gateway.WeatherAppService;

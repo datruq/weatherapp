@@ -1,4 +1,4 @@
-package com.finleap.casestudy.weatherapp.Utils;
+package com.finleap.casestudy.weatherapp.utils;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;

@@ -1,6 +1,6 @@
 package com.finleap.casestudy.weatherapp.domain.entity;
 
-import com.finleap.casestudy.weatherapp.Utils.DateUtils;
+import com.finleap.casestudy.weatherapp.utils.DateUtils;
 import com.finleap.casestudy.weatherapp.api.dto.OpenWeatherMapDTO;
 import org.assertj.core.api.Assertions;
 import org.junit.Before;
