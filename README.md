@@ -19,7 +19,7 @@ When you already have the project con your local machine, just open it with Inte
 
 **Note:** We need to enable annotation processing: Setting/Build, Execution, Deployment/Compiler/Annotation Processors check "Enable annotation processing"
 
-![alt text](https://github.com/datruq/weatherapp/img/lombok_enable_annotation.png)
+![alt text](https://github.com/datruq/weatherapp/blob/master/img/lombok_enable_annotation.png)
 
 ### Building and running this application
 
