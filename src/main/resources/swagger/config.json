@@ -1,0 +1,7 @@
+{
+  "dateLibrary": "java8",
+  "hideGenerationTimestamp": true,
+  "modelPackage": "com.finleap.casestudy.weatherapp.swagger.model",
+  "apiPackage": "com.finleap.casestudy.weatherapp.swagger.api",
+  "invokerPackage": "com.finleap.casestudy.weatherapp.swagger"
+}
