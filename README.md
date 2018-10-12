@@ -32,6 +32,13 @@ When it finished clonning and have it in your local machine, just open it with I
 6. Execute the JAR: ``` java -jar weather-app-1.0.jar```.
 7. The application should be available at http://localhost:8080/weather/data.
 
+## REST API Documentation
+
+It was made it with Swagger, and to see it, just open the following URL with your favorite browser
+
+````http://localhost:8080/swagger-ui.html````
+
+
 ## REST API overviiew
 
 With this WeatherApp we can get:
