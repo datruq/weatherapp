@@ -13,8 +13,8 @@ import java.util.stream.Collectors;
 @Getter
 public class ForcastWeatherMetricsEntity {
 
-    private static final LocalTime SIXTEEN_TIME = LocalTime.of(16, 0);
-    private static final LocalTime SIX_TIME = LocalTime.of(6, 0);
+    private static final LocalTime SIXTEEN_TIME = LocalTime.of(15, 59);
+    private static final LocalTime SIX_TIME = LocalTime.of(5, 59);
 
     @Setter
     int code;
@@ -41,7 +41,7 @@ public class ForcastWeatherMetricsEntity {
                 pressure.getForcastWeatherMain().getPressure()).average().orElse(Double.NaN);
     }
 
-    private List<OpenWeatherMapDTO.ForcastWeather> getDailyTime(
+    public List<OpenWeatherMapDTO.ForcastWeather> getDailyTime(
             List<OpenWeatherMapDTO.ForcastWeather> forcastWeatherList){
         return forcastWeatherList.stream().filter( threeDays ->{
             LocalDateTime dateTime = DateUtils.stringDateTimeToLocalDateTime(threeDays.getForcastWeatherDateTime());
@@ -49,7 +49,7 @@ public class ForcastWeatherMetricsEntity {
                 }).collect(Collectors.toList());
     }
 
-    private List<OpenWeatherMapDTO.ForcastWeather> getNightlyTime(
+    public List<OpenWeatherMapDTO.ForcastWeather> getNightlyTime(
             List<OpenWeatherMapDTO.ForcastWeather> forcastWeatherList){
         return forcastWeatherList.stream().filter( threeDays ->{
             LocalDateTime dateTime = DateUtils.stringDateTimeToLocalDateTime(threeDays.getForcastWeatherDateTime());
@@ -57,7 +57,7 @@ public class ForcastWeatherMetricsEntity {
         }).collect(Collectors.toList());
     }
 
-    private boolean isBetweenSixAndSixteen(LocalDateTime actualDate){
+    public boolean isBetweenSixAndSixteen(LocalDateTime actualDate){
         return (actualDate.isBefore(LocalDateTime.of(actualDate.toLocalDate(), SIXTEEN_TIME)) &&
                 actualDate.isAfter(LocalDateTime.of(actualDate.toLocalDate(), SIX_TIME)));
     }

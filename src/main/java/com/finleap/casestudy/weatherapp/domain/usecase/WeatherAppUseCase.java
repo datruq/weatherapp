@@ -28,7 +28,7 @@ public class WeatherAppUseCase {
 
     }
 
-    private ForcastWeatherMetricsEntity openWeatherMapDTOToForcastWeatherMetrics(OpenWeatherMapDTO openWeatherMapDTO){
+    public ForcastWeatherMetricsEntity openWeatherMapDTOToForcastWeatherMetrics(OpenWeatherMapDTO openWeatherMapDTO){
         ForcastWeatherMetricsEntity forcastWeatherMetrics = new ForcastWeatherMetricsEntity();
         forcastWeatherMetrics.setCityName(openWeatherMapDTO.getForcastWeatherCity().getCity());
         forcastWeatherMetrics.setCode(openWeatherMapDTO.getCode());

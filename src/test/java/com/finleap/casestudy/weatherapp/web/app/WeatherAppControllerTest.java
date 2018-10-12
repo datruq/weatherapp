@@ -1,10 +1,12 @@
 package com.finleap.casestudy.weatherapp.web.app;
 
+import com.finleap.casestudy.weatherapp.domain.entity.ForcastWeatherMetricsEntity;
 import com.finleap.casestudy.weatherapp.domain.usecase.WeatherAppUseCase;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
+import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -22,6 +24,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringJUnit4ClassRunner.class)
 public class WeatherAppControllerTest {
 
+    public static final int HTTP_STATUS_OK = 200;
+    public static final String HTTP_STATUS_MESSAGE_OK = "Status OK";
+    public static final String LOCAL_CITY = "medellin";
+    public static final String BERLIN = "berlin";
     private MockMvc mockMvc;
 
     @MockBean
@@ -39,29 +45,37 @@ public class WeatherAppControllerTest {
     }
 
     @Test
-    public void shouldReturnTheTestNoArgs() throws Exception {
-
-        doReturn("").when(weatherAppUseCase).getWeatjerReportForSpecificCity("");
-
-        this.mockMvc.perform(get("/weather/data"))
+    public void shouldReturnTheTestForBerlin() throws Exception {
+        doReturn(setForcastWeatherMetricsEntity(BERLIN)).when(weatherAppUseCase)
+                .getWeatjerReportForSpecificCity(BERLIN);
+        this.mockMvc.perform(get("/weather/data/{city}", BERLIN))
                 .andExpect(status().isOk())
-                .andExpect(content().string("01/01/1890"));
-        verify(weatherAppUseCase, times(1)).getWeatjerReportForSpecificCity("");
+                .andExpect(content().string("{\"code\":200,\"message\":\"Status OK\",\"cityName\":" +
+                        "\"berlin\",\"dailyAverage\":0.0,\"nightlyAverage\":0.0,\"pressureAverage\":0.0}"));
+        verify(weatherAppUseCase, times(1)).getWeatjerReportForSpecificCity(BERLIN);
         verifyNoMoreInteractions(weatherAppUseCase);
 
     }
 
     @Test
-    public void shouldReturnTheTest() throws Exception {
-
-        doReturn("").when(weatherAppUseCase).getWeatjerReportForSpecificCity("");
-
-        this.mockMvc.perform(get("/weather/data/{city}", "medellin"))
+    public void shouldReturnTheTestDefault() throws Exception {
+        doReturn(setForcastWeatherMetricsEntity(LOCAL_CITY)).when(weatherAppUseCase)
+                .getWeatjerReportForSpecificCity(Mockito.anyString());
+        this.mockMvc.perform(get("/weather/data"))
                 .andExpect(status().isOk())
-                .andExpect(content().string("01/01/1890"));
-        verify(weatherAppUseCase, times(1)).getWeatjerReportForSpecificCity("");
+                .andExpect(content().string("{\"code\":200,\"message\":\"Status OK\",\"cityName\":" +
+                        "\"medellin\",\"dailyAverage\":0.0,\"nightlyAverage\":0.0,\"pressureAverage\":0.0}"));
+        verify(weatherAppUseCase, times(1)).getWeatjerReportForSpecificCity(Mockito.anyString());
         verifyNoMoreInteractions(weatherAppUseCase);
 
+    }
+
+    private ForcastWeatherMetricsEntity setForcastWeatherMetricsEntity(String city){
+        ForcastWeatherMetricsEntity forcastWeatherMetricsEntity = new ForcastWeatherMetricsEntity();
+        forcastWeatherMetricsEntity.setCityName(city);
+        forcastWeatherMetricsEntity.setCode(HTTP_STATUS_OK);
+        forcastWeatherMetricsEntity.setMessage(HTTP_STATUS_MESSAGE_OK);
+        return forcastWeatherMetricsEntity;
     }
 
 }
