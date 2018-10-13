@@ -23,7 +23,7 @@ public class OpenWeatherMapDTO {
     @Data
     @NoArgsConstructor
     @JsonIgnoreProperties(ignoreUnknown = true)
-    static public class ForcastWeather {
+    public static class ForcastWeather {
         @JsonProperty("main")
         ForcastWeatherMain forcastWeatherMain;
         @JsonProperty("dt_txt")
@@ -33,7 +33,7 @@ public class OpenWeatherMapDTO {
     @Data
     @NoArgsConstructor
     @JsonIgnoreProperties(ignoreUnknown = true)
-    static public class ForcastWeatherMain {
+    public static class ForcastWeatherMain {
         @JsonProperty("temp")
         int temperature;
         int pressure;
@@ -42,7 +42,7 @@ public class OpenWeatherMapDTO {
     @Data
     @NoArgsConstructor
     @JsonIgnoreProperties(ignoreUnknown = true)
-    static public class ForcastWeatherCity {
+    public static class ForcastWeatherCity {
         @JsonProperty("name")
         String city;
     }
