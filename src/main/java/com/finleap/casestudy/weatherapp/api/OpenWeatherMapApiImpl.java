@@ -5,7 +5,6 @@ import com.finleap.casestudy.weatherapp.api.dto.OpenWeatherMapDTO;
 import com.finleap.casestudy.weatherapp.domain.gateway.WeatherAppService;
 import com.finleap.casestudy.weatherapp.exceptions.WeatherAppException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;

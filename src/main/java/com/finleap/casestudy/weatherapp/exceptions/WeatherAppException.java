@@ -4,7 +4,7 @@ import org.springframework.http.HttpStatus;
 
 public class WeatherAppException extends RuntimeException{
 
-    private HttpStatus code;
+    private final HttpStatus code;
 
     public WeatherAppException(String msg, HttpStatus code) {
         super(msg);

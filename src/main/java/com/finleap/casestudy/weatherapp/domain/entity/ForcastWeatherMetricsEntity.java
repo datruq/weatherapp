@@ -27,18 +27,21 @@ public class ForcastWeatherMetricsEntity {
     double pressureAverage;
 
     public double setDailyAverage(List<OpenWeatherMapDTO.ForcastWeather> forcastWeatherList){
-        return this.dailyAverage = getDailyTime(forcastWeatherList).stream().mapToDouble(daily ->
+        this.dailyAverage = getDailyTime(forcastWeatherList).stream().mapToDouble(daily ->
                 daily.getForcastWeatherMain().getTemperature()).average().orElse(Double.NaN);
+        return this.dailyAverage;
     }
 
     public double setNightlyAverage(List<OpenWeatherMapDTO.ForcastWeather> forcastWeatherList){
-        return this.nightlyAverage = getNightlyTime(forcastWeatherList).stream().mapToDouble(nightly ->
+        this.nightlyAverage = getNightlyTime(forcastWeatherList).stream().mapToDouble(nightly ->
                 nightly.getForcastWeatherMain().getTemperature()).average().orElse(Double.NaN);
+        return this.nightlyAverage;
     }
 
     public double setPressureAverage(List<OpenWeatherMapDTO.ForcastWeather> forcastWeatherList){
-        return this.pressureAverage = forcastWeatherList.stream().mapToDouble(pressure ->
+        this.pressureAverage = forcastWeatherList.stream().mapToDouble(pressure ->
                 pressure.getForcastWeatherMain().getPressure()).average().orElse(Double.NaN);
+        return this.pressureAverage;
     }
 
     public List<OpenWeatherMapDTO.ForcastWeather> getDailyTime(

@@ -15,7 +15,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("weather/")
-@Api(description = "Set of endpoints for consult on WeatherApp.")
+@Api("Set of endpoints for consult on WeatherApp.")
 public class WeatherAppController {
 
     @Autowired

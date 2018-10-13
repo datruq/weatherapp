@@ -8,6 +8,8 @@ import java.io.InputStream;
 
 public class FileUtils {
 
+    private FileUtils(){}
+
     public static String readResource(String fileName) {
 
         try {
