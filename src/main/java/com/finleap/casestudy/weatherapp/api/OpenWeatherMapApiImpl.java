@@ -5,6 +5,7 @@ import com.finleap.casestudy.weatherapp.api.dto.OpenWeatherMapDTO;
 import com.finleap.casestudy.weatherapp.domain.gateway.WeatherAppService;
 import com.finleap.casestudy.weatherapp.exceptions.WeatherAppException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -38,6 +39,7 @@ public class OpenWeatherMapApiImpl implements WeatherAppService {
 
 
     @Override
+    @Cacheable("OpenWeatherMapDTOs")
     public OpenWeatherMapDTO getReportFromCityForTheLastThreeHours(String city) {
         Map<String, String> params = new HashMap<>();
         params.put(OPEN_WEATHER_MAP_CITY, city);
