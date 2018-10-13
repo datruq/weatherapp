@@ -7,8 +7,7 @@ Case study for weather average metrics using OpenWeatherMap API
 * Java 8
 * Gradle 4+
 * Git
-* IntelliJ IDE
-* Lombok
+* Lombok on your IDE
 
 ## Installing
 
