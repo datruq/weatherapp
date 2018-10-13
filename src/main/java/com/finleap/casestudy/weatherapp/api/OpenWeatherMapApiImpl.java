@@ -3,11 +3,15 @@ package com.finleap.casestudy.weatherapp.api;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.finleap.casestudy.weatherapp.api.dto.OpenWeatherMapDTO;
 import com.finleap.casestudy.weatherapp.domain.gateway.WeatherAppService;
+import com.finleap.casestudy.weatherapp.exceptions.WeatherAppException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
@@ -20,22 +24,35 @@ public class OpenWeatherMapApiImpl implements WeatherAppService {
     private static final String HTTP_ENTITY_PARAMETERS = "parameters";
     private static final String OPEN_WEATHER_MAP_CITY = "city";
 
-    @Value("${x.api.key}")
     private String appKeyName;
-    @Value("${open.weather.map.api.key}")
     private String appKeyValue;
-    @Value("${open.weather.map.url}")
     private String openWeatherMapUrl;
+    private RestTemplate restTemplate;
+
+    @Autowired
+    public OpenWeatherMapApiImpl(String appKeyName, String appKeyValue, String openWeatherMapUrl, RestTemplate restTemplate){
+        this.appKeyName = appKeyName;
+        this.appKeyValue = appKeyValue;
+        this.openWeatherMapUrl = openWeatherMapUrl;
+        this.restTemplate = restTemplate;
+    }
 
 
     @Override
-    public OpenWeatherMapDTO getReportFromCityForTheLastThreeHours(String city) throws IOException {
-        RestTemplate restTemplate = new RestTemplate();
+    public OpenWeatherMapDTO getReportFromCityForTheLastThreeHours(String city) {
         Map<String, String> params = new HashMap<>();
         params.put(OPEN_WEATHER_MAP_CITY, city);
         HttpEntity<String> entity = setHttpHeaders(addHttpHeader(appKeyName, appKeyValue));
-        return jsonStringToOpenWeatherMapDTO(restTemplate.exchange(
-                openWeatherMapUrl, HttpMethod.GET, entity, String.class, params).getBody());
+        OpenWeatherMapDTO openWeatherMapDTO;
+        try {
+            openWeatherMapDTO = jsonStringToOpenWeatherMapDTO(restTemplate.exchange(
+                    openWeatherMapUrl, HttpMethod.GET, entity, String.class, params).getBody());
+        }catch (HttpClientErrorException e){
+            throw new WeatherAppException(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }catch (IOException e){
+            throw new WeatherAppException(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        return openWeatherMapDTO;
     }
 
     public OpenWeatherMapDTO jsonStringToOpenWeatherMapDTO(String jsonString) throws IOException {
