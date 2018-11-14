@@ -10,6 +10,7 @@ import org.junit.Test;
 import org.mockito.Mockito;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,8 +23,8 @@ public class WeatherAppUseCaseTest {
     private static final String BERLIN = "berlin";
     private static final String HTTP_STATUS_OK = "Status OK";
     private static final int HTTP_STATUS_CODE_OK = 200;
-    private static final int YEAR = 2018;
-    private static final int MONTH = 10;
+    private static final int YEAR = LocalDate.now().getYear();
+    private static final int MONTH = LocalDate.now().getMonth().getValue();
     private static final int HOUR = 14;
     private static final int MINUTE = 00;
     private static final double TEMPERATURE_START = 0D;
